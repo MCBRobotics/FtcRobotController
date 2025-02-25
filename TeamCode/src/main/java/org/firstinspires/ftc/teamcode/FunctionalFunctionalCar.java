@@ -29,15 +29,10 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import static java.util.logging.Logger.global;
-
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -69,7 +64,7 @@ import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 
 @TeleOp(name="Functional Car", group="Linear OpMode")
 //@Disabled
-public class FunctionalCar extends LinearOpMode {
+public class FunctionalFunctionalCar extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -94,7 +89,7 @@ public class FunctionalCar extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
         Arm1 = hardwareMap.get(DcMotor.class, "ArmMotor1");
         ///Arm2 = hardwareMap.get(DcMotor.class, "ArmMotor2");
-        double powerTele = 0;
+
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -112,12 +107,8 @@ public class FunctionalCar extends LinearOpMode {
 
         Arm1.setTargetPosition(0);
         ///Arm2.setTargetPosition(0);
-        Arm1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        Arm1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
+        Arm1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ///Arm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
 
 
         // Wait for the game to start (driver presses START)
@@ -129,8 +120,6 @@ public class FunctionalCar extends LinearOpMode {
 
         int zeroPositionArm1 = Arm1.getCurrentPosition();
         //int zeroPositionArm2 = Arm2.getCurrentPosition();
-
-
 
 
         //this is to set where you want the arms final position to be
@@ -177,16 +166,6 @@ public class FunctionalCar extends LinearOpMode {
             //this syncs up the final postition for arm2 so that it doesnt jitter
             //int targetPositionArm2 = targetPosition - differenceInArms;
 
-            if (gamepad2.dpad_left) {
-                double powerArm1 = 0.5;
-                while (Arm1.getCurrentPosition()>-130) {
-                    Arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                    Arm1.setPower(powerArm1);
-                    telemetry.addData("Arm1 Test", Arm1.getCurrentPosition());
-                }
-                Arm1.setPower(0);
-            }
 
             if (gamepad2.dpad_down) {
                 ///int currentPositionArm1 = Arm1.getCurrentPosition();
@@ -217,8 +196,9 @@ public class FunctionalCar extends LinearOpMode {
 //                powerArm1 *= Math.signum(errorArm1);
 //                powerArm2 *= Math.signum(errorArm2);
 
-                double powerArm1 = 0.5;
+                double powerArm1 = 1;
                 //double powerArm2 = 0.6;
+
 
                 ////////////////
 //
@@ -264,9 +244,7 @@ public class FunctionalCar extends LinearOpMode {
             }
             else if (gamepad2.dpad_up) {
                 // Smoothly move downwards
-
-
-                int currentPositionArm1 = Arm1.getCurrentPosition();
+                ///int currentPositionArm1 = Arm1.getCurrentPosition();
                 //int currentPositionArm2 = Arm2.getCurrentPosition();
 
 //                int errorArm1 = (targetPosition - 100) - currentPositionArm1;
@@ -281,29 +259,14 @@ public class FunctionalCar extends LinearOpMode {
 //
 //                powerArm1 *= Math.signum(errorArm1);
                 //powerArm2 *= Math.signum(errorArm2);
-
-
-
-                // (100-current)/100
-//                double powerArm1 = 0.1;
-
-//                if ((Arm1.getCurrentPosition() > -120) || (Arm1.getCurrentPosition() < -140));
-                //double powerArm1 = (-((double) (130 + Arm1.getCurrentPosition()) / 130));
-//                double powerArm1 = 0.1;
-                //////////Math.min(1, distanceArm1 / decelerationThreshold);
-
-                // double powerArm1 = -0.5;
-                //Arm1.setTargetPosition(-100);
+                double powerArm1 = -1;
+                ///Arm1.setTargetPosition(zeroPositionArm1);
                 //Arm2.setTargetPosition(zeroPositionArm2);
 //RUN_TO_POSITION
-                //RUN_WITHOUT_ENCODER
                 Arm1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                ////Arm1.setMode(DcMotor.ZeroPowerBehavior.BRAKE);
-                Arm1.setTargetPosition(-130);
-                //Arm1.setMode(DcMotor.);
                 //Arm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                Arm1.setPower(-1);
+                Arm1.setPower(powerArm1);
                 //Arm2.setPower(powerArm2);
 
                 ///holdPositionArm1 = currentPositionArm1; // Update hold position
@@ -334,8 +297,6 @@ public class FunctionalCar extends LinearOpMode {
             //telemetry.addData("targetPositionArm2 Test", targetPositionArm2);
             telemetry.addData("zeroPositionArm1 Test", zeroPositionArm1);
             //telemetry.addData("zeroPositionArm2 Test", zeroPositionArm2);
-
-            telemetry.addData("Arm1 speed",  (-((double) (130 + Arm1.getCurrentPosition())) / 130));
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Arm1 Test", Arm1.getCurrentPosition());
