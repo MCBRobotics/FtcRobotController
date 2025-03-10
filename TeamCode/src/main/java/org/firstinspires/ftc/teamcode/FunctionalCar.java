@@ -263,10 +263,43 @@ public class FunctionalCar extends LinearOpMode {
 
             }
             else if (gamepad2.dpad_up) {
-                // Smoothly move downwards
 
+                    // Set the target position to 130 for the upward movement
+                int targetPositionNew = -130;
+
+                    // Set the motor mode to RUN_TO_POSITION so the motor moves to the target position
+                Arm1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    // Set the target position for the motor
+                Arm1.setTargetPosition(targetPositionNew);
+
+                    // Set the power to move the motor towards the target position
+                Arm1.setPower(-0.5);  // Full speed to move to the target position
+                    // Check if the motor's current position is within the range of -125 to -135
+                int currentPosition = Arm1.getCurrentPosition();
+                if (currentPosition >= -140 && currentPosition <= -120) {
+                        // Once the motor is within the range, stop it and hold
+                    Arm1.setPower(0);  // Stop the motor
+                    Arm1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);  // Hold the position
+
+                        // Set the motor's zero-power behavior to BRAKE to ensure it holds the position
+                    Arm1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                }
+
+
+                /*
+                if (Arm1.getCurrentPosition() >= -140 && Arm1.getCurrentPosition() <= -120) {
+                    Arm1.setTargetPosition(Arm1.getCurrentPosition());
+                }
 
                 int currentPositionArm1 = Arm1.getCurrentPosition();
+                Arm1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                Arm1.setPower(-1);
+                */
+
+
+
+
                 //int currentPositionArm2 = Arm2.getCurrentPosition();
 
 //                int errorArm1 = (targetPosition - 100) - currentPositionArm1;
@@ -297,13 +330,12 @@ public class FunctionalCar extends LinearOpMode {
                 //Arm2.setTargetPosition(zeroPositionArm2);
 //RUN_TO_POSITION
                 //RUN_WITHOUT_ENCODER
-                Arm1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
                 ////Arm1.setMode(DcMotor.ZeroPowerBehavior.BRAKE);
-                Arm1.setTargetPosition(-130);
+                ///Arm1.setTargetPosition(-130);
                 //Arm1.setMode(DcMotor.);
                 //Arm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-                Arm1.setPower(-1);
                 //Arm2.setPower(powerArm2);
 
                 ///holdPositionArm1 = currentPositionArm1; // Update hold position

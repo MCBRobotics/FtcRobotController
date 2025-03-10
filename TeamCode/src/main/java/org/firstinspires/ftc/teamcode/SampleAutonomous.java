@@ -39,9 +39,6 @@ public class SampleAutonomous extends LinearOpMode
         {
             // Note, this example takes more than 30 seconds to execute, so turn OFF the auto timer.
 
-
-
-
             robot.drive(76, 0.9, 0);
             //sleep(3000);
             robot.strafe(20, 0.9, 0.0);

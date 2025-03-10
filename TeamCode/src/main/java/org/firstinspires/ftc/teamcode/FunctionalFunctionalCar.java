@@ -196,7 +196,7 @@ public class FunctionalFunctionalCar extends LinearOpMode {
 //                powerArm1 *= Math.signum(errorArm1);
 //                powerArm2 *= Math.signum(errorArm2);
 
-                double powerArm1 = 1;
+                double powerArm1 = 0.25;
                 //double powerArm2 = 0.6;
 
 
@@ -259,7 +259,7 @@ public class FunctionalFunctionalCar extends LinearOpMode {
 //
 //                powerArm1 *= Math.signum(errorArm1);
                 //powerArm2 *= Math.signum(errorArm2);
-                double powerArm1 = -1;
+                double powerArm1 = -0.25;
                 ///Arm1.setTargetPosition(zeroPositionArm1);
                 //Arm2.setTargetPosition(zeroPositionArm2);
 //RUN_TO_POSITION
